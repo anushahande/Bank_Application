@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -123,24 +124,46 @@ namespace Bank_Application
         {
             if (accid == 010)
                 cu[0].deposit = depo;
-            if (accid == 011)
+            else if (accid == 011)
                 cu[1].deposit = depo;
-            if (accid == 012)
+            else if (accid == 012)
                 cu[2].deposit = depo;
-            if (accid == 013)
+            else if (accid == 013)
                 cu[3].deposit = depo;
-            if (accid == 014)
+            else
                 cu[4].deposit = depo;
 
         }
         public void display()
         {
+            string f1= "C:/Users/adminvm.adminvm/source/repos/Bank_Application/f1.txt";
+            string name, gender, id, age, bal;
+            StreamWriter sw = new StreamWriter(f1);
+            sw.WriteLine(" Acc no.   Name    Age   Gender   Balance");
+            sw.WriteLine("-----------------------------------------");
+            for (int i = 0; i <= 4; i++)
+            {
+                id = cu[i].accid.ToString();
+                name = cu[i].accname;
+                age = cu[i].age.ToString();
+                gender = cu[i].gender;
+                bal = cu[i].deposit.ToString();
+                sw.Write("  " + id + "      ");
+                sw.Write(name + "      ");
+                sw.Write(age + "      ");
+                sw.Write(gender + "      ");
+                sw.Write(bal);
+                sw.WriteLine();
+            }
+            sw.WriteLine(cu);
+            sw.Flush();
+            sw.Close();
             Console.WriteLine("============================================");
             Console.WriteLine(" Acc no.|| Name || Age || Gender || Balance");
             Console.WriteLine("============================================");
-            foreach (Bank b in cu)
+            for (int i= 0;i<= 4;i++)
             {
-                Console.WriteLine("   " + b.accid + "     " + b.accname + "     " + b.age + "      " + b.gender + "         " + b.deposit);
+                Console.WriteLine("   " + cu[i].accid + "     " + cu[i].accname + "     " + cu[i].age + "      " + cu[i].gender + "         " +cu[i].deposit);
             }
         }
     }
